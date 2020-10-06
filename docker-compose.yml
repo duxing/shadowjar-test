@@ -1,0 +1,10 @@
+version: '3.7'
+services:
+  app:
+    build: .
+    image: ${REPO:-localhost}:${TAG:-latest}
+    environment:
+      AWS_PROFILE: ${AWS_PROFILE}
+    volumes:
+       - /var/run:/var/run
+       - ${HOME}/.aws/:/root/.aws/

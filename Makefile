@@ -1,11 +1,15 @@
-.DEFAULT_GOAL := gradle_build
+.DEFAULT_GOAL := build
 
-GRADLE := docker run --rm -it -u root -v $(CUR_DIR):/app -w /app gradle:jdk8-alpine gradle
+GRADLE := ./gradlew
 
-.PHONY: docker_gradle_build
-docker_gradle_build:
-	$(GRADLE) build
+.PHONY: build
+build:
+	$(GRADLE) clean shadowJar
 
-.PHONY: gradle_build
-gradle_build:
-	gradle build
+
+.PHONY: run
+run: build
+	@docker-compose up --build
+
+
+
